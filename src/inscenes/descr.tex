@@ -1,0 +1,229 @@
+\subsection{Дескриптор сцены}
+
+\frame{
+    \frametitle{Дескриптор сцены}
+
+
+
+    \def\drawdescrpicture{
+        \begin{center}
+        \begin{scriptsize}
+        \tikzstyle{rootf} = [
+            draw=yellow!50!black!70,thick,
+            minimum height=2cm,
+            minimum width=2cm,
+            top color=yellow!20,
+            bottom color=yellow!60!black!20,
+            decorate,decoration={random steps,segment length=3pt,amplitude=1pt}
+        ]
+
+        \tikzstyle{pointf} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=zdarkblue!50!black!50,
+            top color=white,
+            bottom color=zdarkblue!50!black!20
+        ]
+
+        \tikzstyle{shotf} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1.5cm,
+            draw=red!100!black!50,
+            top color=white,
+            bottom color=red!50!black!20
+        ]
+
+        \tikzstyle{subshotf} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=red!70!black!50,
+            top color=white,
+            bottom color=red!30!black!20
+        ]
+
+
+        \tikzstyle{spacef} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=green!50!red!70!black!50,
+            top color=white,
+            bottom color=green!30!red!30!black!20
+        ]
+
+        \tikzstyle{framef} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1.5cm,
+            draw=green!50!black!50,
+            top color=white,
+            bottom color=green!50!black!20
+        ]
+
+        \tikzstyle{bowf} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=green!70!red!10!black!50,
+            top color=white,
+            bottom color=green!70!red!10!black!20
+        ]
+
+        \tikzstyle{gistf} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=green!50!black!50,
+            top color=white,
+            bottom color=green!50!black!20
+        ]
+
+
+        \tikzstyle{googlef} = [
+            rectangle, rounded corners,
+            thick,
+            minimum size=1cm,
+            draw=green!70!blue!70!black!50,
+            top color=white,
+            bottom color=green!70!blue!70!black!20
+        ]
+
+
+        \tikzstyle{itemf} = [
+            rectangle,thick,
+            minimum width=2cm,
+            minimum height=2cm,
+            draw=teal!50!black!50,
+            top color=white,
+            bottom color=teal!50!black!20
+        ]
+        \begin{tikzpicture}[thick, node distance=2.5cm, text height=0.7ex, text depth=.25ex, auto]
+
+            \node[pointf] (all) {{\normalsize Дескриптор}};
+            \node[shotf, below left of=all] (shot) {\footnotesize
+                \begin{tabular}{c}
+                    отношения длины \\
+                    сцены к~длинам \\
+                    других сцен \\
+                \end{tabular}
+            };
+                \node[subshotf, above left of=shot] (subshot) {\scriptsize
+                    \begin{tabular}{c}
+                        удобно хранить, \\
+                        с~объединениями \\
+                        соседних сцен \\
+                    \end{tabular}
+                };
+                \node[spacef, below of=subshot] (space) {\tiny
+                    \begin{tabular}{c} %% для длин \\
+                        по $3$ предыдущим \\
+                        \ ---~$6$~вариантов.
+                    \end{tabular}
+                };
+
+            \node[framef, below right of=all] (frame) {\footnotesize
+                \begin{tabular}{c}
+                    Xарактеристики \\
+                    {\scriptsize начального и конечного} \\
+                    кадров \\
+                \end{tabular}
+            };
+
+                \node[bowf,  below   of=frame] (bow) {\scriptsize
+                    \begin{tabular}{c}
+                        {\tt\color{red} или} \\
+                        <<мешки слов>> \\
+                    \end{tabular}
+                };
+
+                    \node[bowf,  below of=bow] (bowplus) {\tiny
+                        \begin{tabular}{c}
+                            лучше соответвует \\
+                            предметной области\\
+                        \end{tabular}
+                    };
+
+                \node[gistf, below right of=frame] (gist) {\scriptsize
+                    \begin{tabular}{c}
+                        {\tt\color{red} или} \\
+                        GIST \\
+                    \end{tabular}
+                };
+   
+
+            \path[->, red!100!black!50, very thick] (all) edge (shot);
+                \path[->, red!70!black!50, very thick] (shot) edge (subshot);
+                \path[->, green!50!red!70!black!50, very thick] (subshot) edge (space);
+
+
+            \path[->, green!50!black!50, very thick] (all) edge (frame);
+                \path[->, green!70!red!10!black!50, very thick] (frame) edge (bow);
+                \path[->, green!50!black!50, very thick] (frame) edge (gist);
+
+
+        \end{tikzpicture}
+        \end{scriptsize}
+        \end{center}
+    }
+
+    %\drawdescrpicture
+
+    \begin{enumerate}
+        \item Вектор отношений длины сцены к длинам других сцен;
+            \begin{itemize}
+                \item удобно сразу хранить, с объединениями соседних сцен;
+                \item для относительных длин
+                    по трем предыдущим\ ---~$6$~вариантов.
+            \end{itemize}
+        \vspace{6pt}
+        \item Xарактеристики начального и конечного кадров:
+        \begin{itemize}
+            \item или <<мешки слов>> начального и конечного кадров:
+            \begin{itemize}
+                \item[${\color{zdarkgreen}+}$] лучше соответвует предметной области,
+                \item[${\color{zdarkred}-}$] потенциально бесконечный размер вектора гистограммы;
+            \end{itemize}
+            \item или GIST начального и конечного кадров;
+            \begin{itemize}
+                \item[${\color{zdarkgreen}+}$] не требует какого либо обучения,
+                \item[${\color{zdarkred}-}$] менее точен.
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+%     \vspace{12pt}
+%     \begin{itemize}
+%         \item[${\color{red}\Rightarrow}$] объемный вектор, сравнивать не удобно.
+%     \end{itemize}
+}
+
+% 
+% | 1| 2|x3|
+% | 1   |x3|
+% | 2   |x3|
+% | 1|   x3|
+% | 2|   x3|
+% |      x3|
+
+
+% Rather than using random projections to deﬁne the bits in a code, several authors have
+% pursued machine learning approaches. In [5] the authors used an autoencoder with several
+% hidden layers. The architecture can be thought of as a restricted Boltzmann machine (RBM)
+% in which there are only connections between layers and not within layers. In order to learn 32
+% bits, the middle layer of the autoencoder has 32 hidden units, and noise was injected during
+% training to encourage these bits to be as binary as possible. This method indeed gives codes
+% that are much more compact than the E2LSH codes. In [9] they used multiple stacked RBMs
+% to learn a non-linear mapping between input vector and code bits. Backpropagation using
+% an Neighborhood Components Analysis (NCA) objective function was used to reﬁne the
+% weights in the network to preserve the neighborhood structure of the input space. Figure 1
+% shows that the RBM gives much better performance compared to random bits. A simpler
+% machine learning algorithm (Boosting SSC) was pursued in [10] who used adaBoost to
+% classify a pair of input items as sishotar or nonsishotar. Each weak learner was a decision
+% stump, and the output of all the weak learners on a given output is a binary code. Figure 1
+% shows that this boosting procedure also works much better than E2LSH codes, although
+% slightly worse than the RBMs1
+% .
+
+

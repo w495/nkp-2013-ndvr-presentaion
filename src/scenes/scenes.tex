@@ -1,0 +1,68 @@
+
+\subsection{Виды}
+
+\begin{frame}[allowframebreaks]{Поиск на основе сцен}
+
+    \orangebox{Кадр\ ---~{\it frame}, фотографический кадр}
+    {\footnotesize
+        \begin{itemize}
+            \item[${\color{pacificorange} \Leftarrow}$]
+                отдельная статическая картинка;
+            \item[${\color{pacificorange} \Leftarrow}$]
+                обозначим $\videoframe$.
+        \end{itemize}
+    }
+
+    \vspace{12pt}
+    \zgreenbox{Cъемка\ ---~{\it shot}, кинематографический кадр}
+    {\footnotesize
+        \begin{itemize}
+            \item[${\color{zdarkgreen} \Leftarrow}$]
+                множество фотографических кадров,
+                единство процесса съемки;
+            \item[${\color{zdarkgreen} \Leftarrow}$]
+                обозначим $\videoshot$,
+                $\videoframe \in \videoshot$;
+            \item[${\color{zdarkgreen} \Leftarrow}$]
+                часто называют <<сценой>>, 
+                далее будем рассматривать, $\videoshot$, назвая сценой;
+        \end{itemize}
+    }
+    \vspace{12pt}
+    \zbluebox{Сцена\ ---~{\it scene}, монтажный кадр}
+    {\footnotesize
+        \begin{itemize}
+            \item[${\color{zdarkblue} \Leftarrow}$]
+                множество фотографических кадров,
+                единство места и времени;
+            \item[${\color{zdarkblue} \Leftarrow}$]
+                обозначим $\videoscene$,
+                $\videoframe \in \videoshot \subset \videoscene$.
+        \end{itemize}
+    }
+
+    \zgreenbox{Сцена как <<съемка>>, кинематографический кадр}
+    {
+        ---~совокупность множества фотографических кадров $\videoframe$
+        внутри временной области $\videoline$, кадры,
+        которой $\videoframe_{\color{red} \videoshot, i}$
+        значительно отличается от кадров соседних областей.
+        \[
+            \videoshot =
+                \{
+                    \videoframe_{\color{red} \videoshot, i}
+                        | \videoframediff(\videoframe_{\color{red} \videoshot, i},
+                            \videoframe_{\color{red} \videoshot, j})
+                                < {\color{red} \varepsilon},
+                            \videoframe_{\color{red} \videoshot, i},
+                            \videoframe_{\color{red} \videoshot, j}
+                            \in \videoline
+                \}
+        \]\[
+            \videoframediff \text{\footnotesize \ ---~функция разности кадров}.
+        \]
+    }
+
+    Аналогично можно ввести определение <<звуковой сцены>>,
+    предварительно разделив звуковой сигнал на отсчеты.
+\end{frame}

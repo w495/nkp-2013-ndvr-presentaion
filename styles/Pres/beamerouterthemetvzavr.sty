@@ -1,0 +1,218 @@
+
+\RequirePackage{calc}
+\RequirePackage{tikz}
+
+
+\def\tvzavr@backgroundimagefile{./img/background.jpg}
+\def\tvzavr@opacity{0.5}
+
+\def\tvzavr@logoimagefile{./img/tvzavr-s2c.pdf}
+%
+% \includegraphics[width=1.0cm]{./img/tvzavr.pdf}
+
+\DeclareOptionBeamer{opacity}{\def\tvzavr@opacity{#1}}
+\DeclareOptionBeamer{backgroundimagefile}{\def\tvzavr@backgroundimagefile{#1}}
+
+
+\DeclareOptionBeamer{logoimagefile}{\def\tvzavr@logoimagefile{#1}}
+
+
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+
+
+\pgfdeclareimage[interpolate=true ,height=\the\paperheight+50pt, width=\the\paperwidth]{background}{\tvzavr@backgroundimagefile}
+
+\pgfdeclareimage[interpolate=true ,height=\the\paperheight+90pt, width=\the\paperwidth]{backgroundtitle}{\tvzavr@backgroundimagefile}
+
+
+\pgfdeclareimage[interpolate=true, width=1.0cm]{logo}{\tvzavr@logoimagefile}
+
+
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+
+
+        \ifnum\value{page}>0\relax%
+            \useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight) ;
+
+            \pgftext[at=\pgfpoint{0cm}{0cm},left,base]{\pgfuseimage{backgroundtitle}} ;
+
+            
+        \fi
+        
+        \ifnum\value{page}>1\relax%
+
+            \useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight) ;
+
+            \pgftext[at=\pgfpoint{0cm}{0cm},left,base]{\pgfuseimage{background}} ;
+
+            \ifnum \value{page} > 1
+                \pgftext[at=\pgfpoint{\the\paperwidth-1.1cm}{0.1cm},left,base]{\pgfuseimage{logo}} ;
+
+                \fill[white, opacity=0.1]
+                    (0cm, 0.965\paperheight) --
+                    (0cm, 1.0\paperheight) --
+                    (0.5\paperwidth, 1.0\paperheight) --
+                    (0.5\paperwidth, 0.965\paperheight) ;
+
+                \fill[white, opacity=0.2]
+                    (0.5\paperwidth, 0.965\paperheight) --
+                    (0.5\paperwidth, 1.0\paperheight) --
+                    (1.0\paperwidth, 1.0\paperheight) --
+                    (1.0\paperwidth, 0.965\paperheight) ;
+            \fi
+        \fi
+    \end{tikzpicture}
+
+
+
+}
+
+
+
+
+%%%%%\defbeamertemplate*{navigation symbols}{theme tvzavr}
+%%%%%{%
+%%%%%%  \hbox{%
+%%%%%%    \hbox{\insertslidenavigationsymbol}
+%%%%%%    \hbox{\insertframenavigationsymbol}
+%%%%%%    \hbox{\insertsubsectionnavigationsymbol}
+%%%%%%    \hbox{\insertsectionnavigationsymbol}
+%%%%%%    \hbox{\insertdocnavigationsymbol}
+%%%%%%    \hbox{\insertbackfindforwardnavigationsymbol}%
+%%%%%%  }%
+%%%%%}
+
+
+%%%%%\defbeamertemplate*{footline}{infolines theme}
+%%%%%{
+%%%%%  \leavevmode%
+%%%%%  \hbox{%
+%%%%%	  \begin{beamercolorbox}[wd=.45\paperwidth,ht=2.25ex,dp=1ex,left]{page in footline}%
+%%%%%		  \hspace{1ex} \insertframenumber{} % \hspace*{2ex}
+%%%%%	  \end{beamercolorbox}
+%%%%%	  \begin{beamercolorbox}[wd=.55\paperwidth,ht=2.25ex,dp=1ex,right]{navigation symbols}%
+%%%%%		  %\hspace*{2ex} \insertframenumber{} % \hspace*{2ex}
+%%%%%		  \hbox{
+%%%%%			  \hbox{\insertslidenavigationsymbol}
+%%%%%			  \hbox{\insertframenavigationsymbol}
+%%%%%			  \hbox{\insertsubsectionnavigationsymbol}
+%%%%%			  \hbox{\insertsectionnavigationsymbol}
+%%%%%			  \hbox{\insertdocnavigationsymbol}
+%%%%%			  \hbox{\insertbackfindforwardnavigationsymbol}%
+%%%%%		  }
+%%%%%		  \hspace*{1ex}
+%%%%%	  \end{beamercolorbox}
+%%%%%  }%
+%%%%%  \vskip0pt%
+%%%%%}
+
+
+\ifnum\value{page}>1\relax%
+    \defbeamertemplate*{frametitle}{tvzavr theme}[1][left]
+    {
+        \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+        \@tempdima=\textwidth%
+        \advance\@tempdima by\beamer@leftmargin%
+        \advance\@tempdima by\beamer@rightmargin%
+
+        \begin{beamercolorbox}[sep=0.6cm,#1,wd=\the\@tempdima]{frametitle}
+            \usebeamerfont{my frametitle}%
+            \vbox{}\vskip-1ex%
+            \if@tempswa
+            \else
+                \csname beamer@fte#1\endcsname
+            \fi%
+            \strut\insertframetitle\strut\par%
+            {%
+                \ifx\insertframesubtitle\@empty%
+                \else%
+                    {
+                        \usebeamerfont{framesubtitle}%
+                        \usebeamercolor[fg]{framesubtitle}%
+                        \insertframesubtitle\strut\par%
+                    }%
+                \fi%
+            }%
+            \vskip-1ex%
+            \if@tempswa%
+            \else%
+                \vskip-.3cm%
+            \fi% 
+            set inside beamercolorbox... evil here...
+        \end{beamercolorbox}%
+    }
+    \def\beamer@fteright{\vskip0.35cm\advance\leftskip by 1.7cm\advance\rightskip by1.7cm}
+\fi
+
+
+\setbeamercolor{section in head/foot}{parent=palette quaternary}
+\setbeamercolor{subsection in head/foot}{parent=palette primary}
+
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=subsection in head/foot}
+
+
+% \def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}%
+
+
+\usesectionheadtemplate
+  {\hfill\insertsectionhead}
+  {\hfill\color{fg!50!bg}\insertsectionhead}
+
+                                % Head
+\ifbeamer@compress
+
+    \defbeamertemplate*{headline}{tvzavr theme}
+    {%
+    \leavevmode%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
+        \insertsectionnavigationhorizontal{.5\paperwidth}{\hskip0pt plus1filll}{}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{subsection in head/foot}%
+        \insertsubsectionnavigationhorizontal{.5\paperwidth}{}{\hskip0pt plus1filll}%
+    \end{beamercolorbox}%
+    }
+
+\else
+
+    \defbeamertemplate*{headline}{tvzavr theme}
+    {%
+    \leavevmode%
+    \@tempdimb=2.4375ex%
+    \ifnum\beamer@subsectionmax<\beamer@sectionmax%
+        \multiply\@tempdimb by\beamer@sectionmax%
+    \else%
+        \multiply\@tempdimb by\beamer@subsectionmax%
+    \fi%
+    \ifdim\@tempdimb>0pt%
+        \advance\@tempdimb by 1.125ex%
+        \begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{section in head/foot}%
+        \vbox to\@tempdimb{\vfil\insertsectionnavigation{.5\paperwidth}\vfil}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.5\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+        \vbox to\@tempdimb{\vfil\insertsubsectionnavigation{.5\paperwidth}\vfil}%
+        \end{beamercolorbox}%
+    \fi%
+    }
+
+\fi
+
+
+\defbeamertemplate*{footline}{tvzavr theme}
+{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\mode<all>
+

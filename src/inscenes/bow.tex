@@ -1,0 +1,44 @@
+\subsection{Мешок слов}
+
+\frame{
+    \frametitle{Мешок слов}
+    Предполагаем, что есть некоторый набор изображений, на которых можно обучиться.
+    
+    \vspace{10pt}
+
+    \zbluebox{Обучение}{
+        \scriptsize
+        \begin{itemize}
+            \item[${\color{zdarkblue}\vartriangleright}$]
+                собираем множество фрагментов (на основе SIFT);
+            \item[${\color{zdarkblue}\vartriangleright}$]
+                кластеризуем и строим словарь;
+            \item[${\color{zdarkblue}\vartriangleright}$]
+                квантуем каждый фрагмент по словарю;
+            \item[${\color{zdarkblue}\vartriangleright}$]
+                считаем <<мешки слов>> для каждого изображения;
+            \item[${\color{zdarkblue}\vartriangleright}$]
+                обучаем МОВ на мешках слов.
+        \end{itemize}
+    }
+    
+    \vspace{10pt}
+
+    \zgreenbox{Сопоставление}{
+        \scriptsize
+        \begin{itemize}
+            \item[${\color{zdarkgreen}\vartriangleright}$]
+                выбираем фрагменты из изображения (на основе SIFT);
+            \item[${\color{zdarkgreen}\vartriangleright}$]
+                квантуем каждый фрагмент по словарю;
+            \item[${\color{zdarkgreen}\vartriangleright}$]
+                строим <<мешок слов>> для изображения;
+            \item[${\color{zdarkgreen}\vartriangleright}$]
+                применяем классификатор МОВ.
+        \end{itemize}
+    }
+}
+
+
+
+

@@ -1,0 +1,55 @@
+
+\subsection{Cуществующие методы поиска}
+
+\frame{
+    \frametitle{Как пытаются искать}
+
+        \begin{enumerate}
+            \item  Сравние глобальных особенностей видео.
+                {\tiny
+                    \begin{itemize} \tiny
+                        \item[${\color{zdarkblue} \vartriangleright}$]
+                            функция яркости, функция визуального потока;
+                        \item[${\color{zdarkgreen} +}$]
+                            относительно быстро,
+                            вычислительно просто;
+                        \item[${\color{zdarkred} -}$]
+                            легко обмануть.
+                    \end{itemize}
+                }
+            \item  Сравние отдельных кадров и их сумм:
+                {\tiny
+                    \begin{itemize} \tiny
+                        \item[${\color{zdarkblue} \vartriangleright}$]
+                            глобальные особенности (гистограммы, спектры, GIST);
+                        \item[${\color{zdarkblue} \vartriangleright}$]
+                            локальные особенности (PCA-SIFT, детектор Харриса);
+                        \item[${\color{zdarkgreen} +}$] точно;
+                        \item[${\color{zdarkred} -}$] долго, затратно.
+                    \end{itemize}
+                }
+            \item  Сравние звукового ряда
+                (\href{http://youtube.com}
+                    {\color{zdarkgreen}\it youtube.com}):
+                {\tiny
+                    \begin{itemize} \tiny
+                        \item[${\color{zdarkgreen} +}$] быстро, просто;
+                        \item[${\color{zdarkred} -}$] много ошибок,
+                            не применимо если нет звука.
+                    \end{itemize}
+                }
+            \item  Поиск и сравнение <<визуальных (видео) слов>>
+                (\href{http://licenzero.ru}
+                    {\color{zdarkgreen}\it licenzero.ru}):
+                {\tiny
+                    \begin{itemize} \tiny
+                        \item[${\color{zdarkgreen} +}$] точно,
+                            если достаточная база <<слов>>;
+                        \item[${\color{zdarkred} -}$] долго,
+                            нужно много размеченных данных.
+                    \end{itemize}
+                }
+            \item  Комбинация методов.
+        \end{enumerate}
+        
+}

@@ -1,0 +1,41 @@
+\subsection{Проблемы}
+
+\frame{
+    \frametitle{Связанные проблемы}
+
+    \begin{center}
+        \tikzstyle{nddf} = [
+            rounded rectangle,
+            thick,
+            minimum size=1cm,
+            draw=green!50!black!50,
+            top color=white,
+            bottom color=green!50!black!20
+        ]
+        \tikzstyle{classf} = [
+            rounded rectangle,
+            thick,
+            minimum size=1cm,
+            draw=blue!50!black!50,
+            top color=white,
+            bottom color=blue!50!black!20
+        ]
+        \tikzstyle{searchf} = [
+            rounded rectangle,
+            thick,
+            minimum size=1cm,
+            draw=red!50!black!50,
+            top color=white,
+            bottom color=red!50!black!20
+        ]
+        \begin{tikzpicture}[thick, node distance=3.0cm, text height=0.9ex, text depth=.25ex, auto]
+            \node[nddf] (ndd) {Определение нечетких дубликатов};
+            \node[classf,below left of=ndd] (class)  {Классификация видео};
+            \node[searchf,below right of=class] (search) {Поиск по видео};
+            \path[<->, green!50!black!50, very thick]   (ndd) edge (class);
+            \path[<->, blue!50!black!50, very thick]    (class) edge (search);
+            \path[<->, red!50!black!50, , very thick,decoration={zigzag,segment length=10,amplitude=1,
+                            post=lineto,post length=2pt},font=\scriptsize,line join=round]  (ndd) edge[decorate] (search);
+        \end{tikzpicture}
+    \end{center}
+}

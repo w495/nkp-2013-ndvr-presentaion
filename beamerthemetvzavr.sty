@@ -1,0 +1,47 @@
+% Copyright 2006 by Guido Diepen <tvzavr@cs.uu.nl>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{beamerthemetvzavr}
+
+\RequirePackage{beamerbasethemes}[2004/10/07]
+
+\RequirePackage{calc}
+\RequirePackage{ifthen}
+
+
+
+\newif\iftvzavr@useblacktitletext
+\tvzavr@useblacktitletextfalse
+
+
+
+\DeclareOptionBeamer{backgroundimagefile}{
+    \PassOptionsToPackage{backgroundimagefile=#1}{beamerouterthemetvzavr}
+}
+
+\DeclareOptionBeamer{opacity}{
+    \PassOptionsToPackage{opacity=#1}{beamerouterthemetvzavr}
+}
+
+\DeclareOptionBeamer{useblacktitletext}{\tvzavr@useblacktitletexttrue}
+
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+%%
+%% Цветовая схема
+%%
+\usecolortheme{tvzavr}
+
+%%
+%% Схема шрифтов
+%%
+\usefonttheme{tvzavr}
+
+%%
+%% Схема оформления
+%%
+\useoutertheme{tvzavr}
+
+
+\mode<all>

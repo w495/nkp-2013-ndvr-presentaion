@@ -1,0 +1,177 @@
+\subsection{Алгоритм}
+
+
+
+\frame{
+    \frametitle{Алгоритм поиска нечетких дубликатов видео}
+    {     
+    \begin{itemize} \footnotesize
+        \item $\nv$\ ---~новое видео;
+        \item $\setsv = \{\sv[1], \sv[2], \dots, \sv[n]\}$\ ---~исходные видео:
+            \begin{itemize}
+                \item[${\color{zdarkblue}\leftarrow}$]
+                    {\scriptsize  $\setsv$ может быть пустым};
+                \item[${\color{zdarkblue}\leftarrow}$]
+                    {\scriptsize для непустого $\setsv$
+                        вычислены дескрипторы сцен элементов.}
+            \end{itemize} 
+        \item[1.] Сравниваем дескриптор каждой
+            сцены $\videoshot_{\color{red}\nv,i}$ из $\nv$\
+            с дескриптором каждой сцены
+            $\videoshot_{\color{red}\sv[k],j}$ из $\sv[k]$ в $L_2$.
+        \item[2.] Если дескрипторы совпали $\nv$ c дескрипторами $\sv[k]$.
+            на~некотором временном промежутке ,
+            то считаем эту часть $\nv$\ ---~дубликатом $\sv[k]$,
+            \begin{itemize}
+                \item[] {\scriptsize несовпавшие
+                    части $\nv$\ помещаем в $\setsv$}.
+            \end{itemize}
+        \item[3.] Если дескрипторы не совпали, то считаем $\nv$\ уникальным и
+            добавляем в $\setsv$.
+    \end{itemize}
+    \vspace{4pt}
+    \begin{itemize}
+        \item[${\color{zdarkred}(-)}$] Cравнивать дескрипторы явно\ ---~не эффективно,
+        \begin{itemize}
+            \item[] {\scriptsize можно применить семантическое хеширование}.
+        \end{itemize}
+    \end{itemize}
+    }
+}
+
+
+\subsection{Семантическое хеширование}
+
+\frame{
+    \frametitle{Семантическое хеширование}
+    \begin{itemize}
+        \item Введем бинарные подписи.
+            \vspace{10pt}
+        \item Подписи для близких в $L_2$ сцен должны быть близки.
+            \vspace{10pt}
+        \item  Локально чувстивтельное хеширование:
+            \begin{enumerate}
+                \item  Cлучайная проекция данных на прямую.
+                \item  Случайно выберем порог,
+                    пометив проекции $0$ или $1$.
+                \item  С увеличением числа бит подпись
+                    приближает $L_2$-метрику в исходных дескрипторах.
+            \end{enumerate}
+            \vspace{10pt}
+        \item  Обучаемое хеширование.
+    \end{itemize}
+}
+
+\subsection{Обучаемое хеширование}
+
+\frame{
+    \frametitle{Обучаемое хеширование}
+
+
+    \bluebox{Cтимулирование (boosting)}
+    {\footnotesize
+        \begin{itemize}
+            \item[$\Leftarrow$] BoostSSC;
+            \item[$\Leftarrow$] Расстояние между дескрипторами вычисляется,
+                как расстояние Хемминга.
+        \end{itemize}
+    }
+    \vspace{12pt}
+    \orangebox{Ограниченная машина Больцмана}
+    {\footnotesize
+        \begin{itemize}
+            \item[${\color{pacificorange}\Leftarrow}$] связь только между слоями;
+            \item[${\color{pacificorange}\Leftarrow}$] внутри слоев связи нет;
+            \item[${\color{pacificorange}\Leftarrow}$]
+                мощность слоев понижается от размера входного
+                вектора до размера требуемого кода.
+        \end{itemize}
+
+    }
+%     
+%     \begin{enumerate}
+%         \item  Cтимулирование (boosting).
+%         \begin{itemize}
+%             \item  BoostSSC;
+%             \item  Расстояние между дескрипторами вычисляется, 
+%                 как расстояние Хемминга
+%         \end{itemize}
+%         \item  C использованием ограниченной машины Больцмана:
+%         \begin{itemize}
+%             \item  связь только между слоями;
+%             \item  внутри слоев связи нет;
+%             \item  мощность слоев понижается от размера входного
+%                 вектора до размера требуемого кода;
+%         \end{itemize}
+%     \end{enumerate}
+}
+
+\section{Результаты}
+
+\subsection{Результаты и перспективы}
+
+\frame{
+    \frametitle{Результаты и перспективы}
+    {\color{zdarkgreen} Результаты}:
+        { \footnotesize
+            \begin{itemize}
+                \item предложен подход:
+                \begin{itemize}
+                    \item[${\color{zdarkblue}\vartriangleright}$] {\scriptsize относительные длины},
+                    \item[${\color{zdarkblue}\vartriangleright}$] {\scriptsize выравнивания},
+                    \item[${\color{zdarkblue}\vartriangleright}$] {\scriptsize дескрипторы сцен};
+                \end{itemize}
+                \item проведены эксперименты.
+            \end{itemize}
+        }
+        \vspace{12pt}
+    {\color{zdarkgreen} Дальнейшее развитие}
+        { \footnotesize
+            \begin{itemize}
+                \item изменить алгоритм поска перемены сцены,
+                    \begin{itemize}
+                        \item[$\vartriangleright$] {\scriptsize сейчас используется {\tt ffmpeg}};
+                    \end{itemize}
+                \item хеширование на основе машины Больцмана;
+                \item эксперименты на реальном множестве исxодных данных.
+            \end{itemize}
+        }
+}
+
+% 
+%  \scriptsize
+%     \begin{codebox}
+%         \Procname{Базовый-алгоритм($\TE$, $\TR$)}
+%         \li     $\forall \ \WE \in \SE \in \TE $ \Do
+%         \li         $\forall \WR \in \SR \in \TR $ \Do
+%         \li             $ t(\WE|\WR) \gets u, u \in \mathbb{R}$;
+%                     \End
+%                 \End
+%         \li     \Com{ Инициализируем таблицу $t(\WE|\WR)$ одинаковыми значениями.}
+%         \li     \Пока {не сойдется} \Do
+%         \li         $\forall \ \WE \in \SE \in \TE $ \Do \Com{ Инициализируем остальные таблицы.}
+%         \li             $\forall \WR \in \SR \in \TR $ \Do
+%         \li                 $ counts(\WE|\WR) \gets  0$;  $\quad total(\WR) \gets  0$;
+%                         \End
+%                     \End
+%         \li         $\forall \ \SE, \SR \in \TE, \TR$ \Do \Com{ Вычисляем нормализациию. }
+%         \li             $\forall \ \WE \in \SE$ \Do
+%         \li                 $stotal(\WE) \gets  0$;
+%         \li                 $\forall \ \WR \in \SR$ \Do
+%         \li                     $stotal(\WE) \gets stotal(\WE) + t(\WE|\WR)$;
+%                             \End
+%                         \End
+%         \li             $\forall \ \WE \in \SE$ \Do \Com{ Собираем подсчеты. }
+%         \li                 $\forall \ \WR \in \SR$ \Do
+%         \li                     $counts(\WE|\WR) \gets counts(\WE|\WR) + \dfrac{t(\WE|\WR)}{stotal(\WE)}$;
+%         \li                     $total(\WR) \gets total(\WR) + \dfrac{t(\WE|\WR)}{stotal(\WE)}$;
+%                             \End
+%                         \End
+%                     \End
+%         \li         $\forall \ \WE \in  \TE $ \Do \Com{ Оцениваем вероятность.}
+%         \li             $\forall \WR \in \TR $ \Do
+%         \li                 $ t(\WE|\WR) \gets \dfrac{counts(\WE|\WR)}{total(\WR)}$;
+%                         \End
+%                     \End
+%                 \End
+%     \end{codebox}

@@ -1,0 +1,149 @@
+
+
+\subsection{Зачем}
+
+\begin{frame}{Зачем искать <<нечеткие дубликаты>>}
+
+\note{
+    Поиск нечетких дубликатов может быть полезен
+    для оптической навигации беспилотных аппаратов,
+    для определения характера ландшфта местности,
+    составления каталогов видео,
+    группировки сниппетов поисковых систем,
+    фильтрация видео рекламы
+    и поиска пиратского видео.
+}
+
+    \begin{center}
+        \begin{scriptsize}
+            \tikzstyle{rootf} = [
+                draw=yellow!50!black!70,thick,
+                minimum height=1cm,
+                minimum width=2cm,
+                top color=yellow!20,
+                bottom color=yellow!60!black!20,
+                decorate,decoration={random steps,segment length=3pt,amplitude=1pt}
+            ]
+            \tikzstyle{pointf} = [
+                rounded rectangle,
+                thick,
+                minimum size=1cm,
+                draw=zdarkblue!50!black!50,
+                top color=white,
+                bottom color=zdarkblue!50!black!20
+            ]
+            \tikzstyle{milf} = [
+                rectangle,
+                thick,
+                minimum size=1cm,
+                draw=red!100!black!50,
+                top color=white,
+                bottom color=red!50!black!20
+            ]
+            \tikzstyle{submilf} = [
+                rectangle, rounded corners,
+                thick,
+                minimum size=1cm,
+                draw=red!70!black!50,
+                top color=white,
+                bottom color=red!30!black!20
+            ]
+            \tikzstyle{spacef} = [
+                rectangle, rounded corners,
+                thick,
+                minimum size=1cm,
+                draw=green!50!red!70!black!50,
+                top color=white,
+                bottom color=green!30!red!30!black!20
+            ]
+            \tikzstyle{orgf} = [
+                rounded rectangle,
+                thick,
+                minimum size=1cm,
+                draw=green!50!black!50,
+                top color=white,
+                bottom color=green!50!black!20
+            ]
+            \tikzstyle{catf} = [
+                rounded rectangle,
+                thick,
+                minimum size=1cm,
+                draw=green!70!red!10!black!50,
+                top color=white,
+                bottom color=green!70!red!10!black!20
+            ]
+            \tikzstyle{pirf} = [
+                rounded rectangle,
+                thick,
+                minimum size=1cm,
+                draw=green!50!black!50,
+                top color=white,
+                bottom color=green!50!black!20
+            ]
+            \tikzstyle{googlef} = [
+                rounded rectangle,
+                thick,
+                minimum size=1cm,
+                draw=green!70!blue!70!black!50,
+                top color=white,
+                bottom color=green!70!blue!70!black!20
+            ]
+            \tikzstyle{itemf} = [
+                rectangle,thick,
+                minimum width=2cm,
+                minimum height=1cm,
+                draw=teal!50!black!50,
+                top color=white,
+                bottom color=teal!50!black!20
+            ]
+            \begin{tikzpicture}[
+                thick,node distance=2.5cm,
+                text height=0.7ex,text depth=.25ex,
+                auto
+            ]
+                \node[rootf] (all) {{\normalsize Цели}};
+                \node[milf, below left of=all] (mil) {\footnotesize Военные};
+                    \node[submilf, below left of=mil] (wr) {
+                        \begin{tabular}{c}
+                            {\tiny  оптическая навигация} \\
+                            БПЛА \\
+                        \end{tabular}
+                    };
+                    \node[spacef, below right of=mil] (space) {
+                        \begin{tabular}{c}
+                            определение \\
+                            характера \\
+                            поверхности
+                        \end{tabular}
+                    };
+                \node[orgf, below right of=all] (org) {\footnotesize Мирные};
+                    \node[catf,  below   of=org] (cat) {\scriptsize
+                        \begin{tabular}{c}
+                            cоставление \\
+                            каталогов \\
+                        \end{tabular}
+                    };
+                    \node[pirf, below right of=org] (pir) {
+                        \begin{tabular}{c}
+                            поиск \\
+                            плагиата \\
+                        \end{tabular}
+                    };
+                    \node[googlef, right of=org] (google) {
+                        \begin{tabular}{c}
+                            группировка  \\
+                            сниппетов \\
+                        \end{tabular}
+                    };
+                \path[->, red!100!black!50, very thick] (all) edge (mil);
+                    \path[->, red!70!black!50, very thick] (mil) edge (wr);
+                    \path[->, green!50!red!70!black!50, very thick] (mil) edge (space);
+                \path[->, green!50!black!50, very thick] (all) edge (org);
+                    \path[->, green!70!red!10!black!50, very thick] (org) edge (cat);
+                    \path[->, green!50!black!50, very thick] (org) edge (pir);
+                    \path[->, green!50!blue!70!black!50, very thick] (org) edge (google);
+                    \path[->, green!50!red!70!black!50, very thick] (org) edge (space);
+            \end{tikzpicture}
+        \end{scriptsize}
+    \end{center}
+\end{frame}
